@@ -1,5 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _2.Puzzle.Medium
 {
@@ -76,8 +77,51 @@ namespace _2.Puzzle.Medium
             var output = new List<List<string>>();
 
             // YOUR CODE GOES HERE
+            var locales = input.ToList();
 
+            locales.RemoveAll(s => s == null || s == string.Empty || s == "");
+            locales = locales.Select(s => s.Trim()).ToList();
+            locales.RemoveAll(s => s == "");
+            locales.Sort();
+
+            var anagramDictionary = BuildDictionary(locales);
+
+            foreach (List<string> vals in anagramDictionary.Values.ToList())
+            {
+                output.Add(vals);
+            }
+            
             return output;
+        }
+        
+        static string CreateKey(string term)
+        {
+            Char[] localeArray = term.ToLower().ToCharArray();
+            Array.Sort(localeArray);
+            return new String(localeArray);
+        }
+
+        static Dictionary<string, List<string>> BuildDictionary(IEnumerable<string> localeList)
+        {
+            var dict = new Dictionary<string, List<string>>(); 
+
+            foreach (string origWord in localeList)
+            {
+                List<string> anagramList = new List<string>();
+    
+                string key = CreateKey(origWord);
+                if (!dict.ContainsKey(key))
+                { 
+                    anagramList.Add(origWord);
+                    dict.Add(key, anagramList);
+                } else {
+                    anagramList.Add(dict[key].First());
+                    anagramList.Add(origWord);
+                    dict[key] = anagramList;
+                }
+            }
+            
+            return dict;
         }
     }
 }
