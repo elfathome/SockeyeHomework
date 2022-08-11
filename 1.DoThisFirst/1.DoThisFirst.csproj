@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>_1.WarmUp.Easy</RootNamespace>
     <AssemblyName>1.WarmUp.Easy</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v6.0.032</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
